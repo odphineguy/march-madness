@@ -5,3 +5,10 @@
 find_roofers.py
 phoenix_roofers_contacts.csv
 bracket.html
+
+# wrangler files
+.wrangler
+.dev.vars*
+!.dev.vars.example
+.env*
+!.env.example
