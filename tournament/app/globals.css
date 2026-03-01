@@ -1,0 +1,343 @@
+/* ==========================================
+   TONY'S MADNESS 2026 - Design System
+   Ported from index.html neumorphic theme
+   ========================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@300;500&display=swap');
+
+:root {
+    --bg: #0d0d0d;
+    --surface: #141414;
+    --surface-light: #1a1a1a;
+    --orange: #ff5c00;
+    --orange-muted: #853100;
+    --orange-hover: #ff7a33;
+    --text-main: #f0f0f0;
+    --text-dim: #707070;
+    --text-dark: #444;
+    --shadow-light: rgba(255, 255, 255, 0.03);
+    --shadow-dark: rgba(0, 0, 0, 0.8);
+    --border-subtle: rgba(255, 255, 255, 0.05);
+    --border-orange: rgba(255, 92, 0, 0.3);
+    --pebble-grain: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg);
+    color: var(--text-main);
+    font-family: 'Inter', sans-serif;
+    overflow-x: hidden;
+    min-height: 100vh;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Pebbled Topographic Texture Layer */
+.texture-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 100;
+    opacity: 0.15;
+    background-image: var(--pebble-grain);
+    mix-blend-mode: overlay;
+}
+
+/* Topographic Background */
+.topo-bg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background:
+        radial-gradient(circle at 20% 30%, var(--orange-muted) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, #1a1a1a 0%, transparent 50%);
+    opacity: 0.4;
+}
+
+.topo-lines {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: repeating-radial-gradient(circle at 50% 50%, transparent 0, transparent 40px, rgba(255, 92, 0, 0.05) 41px, transparent 42px);
+    mask-image: linear-gradient(to bottom, black, transparent);
+}
+
+/* Typography */
+h1 {
+    font-size: clamp(4rem, 12vw, 10rem);
+    line-height: 0.85;
+    text-transform: uppercase;
+    letter-spacing: -0.05em;
+    font-weight: 900;
+    color: var(--text-main);
+}
+
+h2 {
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: -0.02em;
+}
+
+.data-mono {
+    font-family: 'JetBrains Mono', monospace;
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    letter-spacing: 0.2em;
+    color: var(--orange);
+}
+
+/* Relief Card */
+.relief-card {
+    background: var(--surface);
+    padding: 2px;
+    border-radius: 40px;
+    position: relative;
+    box-shadow:
+        20px 20px 60px var(--shadow-dark),
+        -5px -5px 20px var(--shadow-light);
+    overflow: hidden;
+    transition: transform 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.relief-inner {
+    background: var(--surface);
+    padding: 2rem;
+    border-radius: 38px;
+    position: relative;
+    z-index: 1;
+    box-shadow:
+        inset 10px 10px 20px rgba(0,0,0,0.5),
+        inset -5px -5px 15px rgba(255,255,255,0.02);
+    border: 1px solid var(--border-subtle);
+}
+
+/* Smaller Card Variant */
+.card {
+    background: var(--surface);
+    border-radius: 16px;
+    padding: 1.5rem;
+    box-shadow:
+        8px 8px 24px var(--shadow-dark),
+        -2px -2px 8px var(--shadow-light),
+        inset 0 1px 0 rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.04);
+}
+
+/* Pebble CTA Button */
+.pebble-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 2.5rem;
+    background: var(--orange);
+    color: black;
+    text-decoration: none;
+    border-radius: 100px;
+    font-weight: 900;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    box-shadow: 0 15px 30px rgba(255, 92, 0, 0.3);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    border: none;
+    cursor: pointer;
+}
+
+.pebble-cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 20px 40px rgba(255, 92, 0, 0.5);
+    background: var(--orange-hover);
+}
+
+.pebble-cta::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: var(--pebble-grain);
+    opacity: 0.3;
+    pointer-events: none;
+}
+
+/* Secondary Button */
+.btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: var(--surface);
+    color: var(--text-main);
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid var(--border-subtle);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow:
+        4px 4px 12px var(--shadow-dark),
+        -1px -1px 4px var(--shadow-light);
+}
+
+.btn-secondary:hover {
+    border-color: var(--border-orange);
+    background: var(--surface-light);
+}
+
+/* Danger Button */
+.btn-danger {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.8rem 1.5rem;
+    background: rgba(255, 50, 50, 0.1);
+    color: #ff5555;
+    border-radius: 100px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255, 50, 50, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-danger:hover {
+    background: rgba(255, 50, 50, 0.2);
+    border-color: rgba(255, 50, 50, 0.4);
+}
+
+/* Form Inputs */
+.input-field {
+    width: 100%;
+    padding: 1rem 1.2rem;
+    background: var(--bg);
+    color: var(--text-main);
+    border: 1px solid var(--border-subtle);
+    border-radius: 12px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow:
+        inset 4px 4px 10px rgba(0,0,0,0.4),
+        inset -2px -2px 6px rgba(255,255,255,0.02);
+}
+
+.input-field::placeholder {
+    color: var(--text-dim);
+    text-transform: uppercase;
+}
+
+.input-field:focus {
+    border-color: var(--border-orange);
+    box-shadow:
+        inset 4px 4px 10px rgba(0,0,0,0.4),
+        inset -2px -2px 6px rgba(255,255,255,0.02),
+        0 0 20px rgba(255, 92, 0, 0.1);
+}
+
+.input-label {
+    display: block;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--text-dim);
+    margin-bottom: 0.5rem;
+}
+
+/* Animation Keyframes */
+@keyframes reveal {
+    from { opacity: 0; transform: translateY(30px); filter: blur(10px); }
+    to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-15px) rotate(2deg); }
+}
+
+@keyframes glow-pulse {
+    0%, 100% { filter: drop-shadow(0 10px 30px rgba(255, 92, 0, 0.3)); }
+    50% { filter: drop-shadow(0 15px 40px rgba(255, 92, 0, 0.6)); }
+}
+
+@keyframes flash-pick {
+    0% { background: rgba(255, 92, 0, 0.5); }
+    100% { background: rgba(255, 92, 0, 0.15); }
+}
+
+.animate-reveal {
+    animation: reveal 1s cubic-bezier(0.23, 1, 0.32, 1) forwards;
+    opacity: 0;
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(255, 92, 0, 0.4);
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 92, 0, 0.6);
+}
+
+/* Utility */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+/* Error/Success Messages */
+.msg-error {
+    color: #ff5555;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+}
+
+.msg-success {
+    color: #55ff55;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 0.75rem;
+    letter-spacing: 0.05em;
+    margin-top: 0.5rem;
+}

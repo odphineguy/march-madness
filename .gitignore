@@ -1,0 +1,7 @@
+# OS files
+.DS_Store
+
+# Unrelated files
+find_roofers.py
+phoenix_roofers_contacts.csv
+bracket.html
